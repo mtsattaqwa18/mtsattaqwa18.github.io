@@ -7,7 +7,7 @@ const SITE = {
   nama: "MTs Attaqwa 18",
   lengkap: "Madrasah Tsanawiyah Attaqwa 18",
   slogan: "Berilmu, berakhlak, dan berprestasi.",
-  alamat: "Jl. KH. Moh. Musa, Kp. Tanah Tinggi, Kel. Setia Asih, Kec. Tarumajaya, Kab. Bekasi",
+  alamat: "Jl. KH. Moh. Musa, Kp. Tanah Tinggi, Kel. Setia Asih, Kec. Tarumajaya, Kab. Bekasi, Kode Pos 17215",
   telp: "0812-0000-0000",
   email: "info@contoh.sch.id",
   peta: "MTs Attaqwa 18 Tanah Tinggi, Tarumajaya, Bekasi",            // kata kunci lokasi di Google Maps
@@ -15,16 +15,15 @@ const SITE = {
 
   // ---- Layanan digital (muncul di menu dan di Beranda) ----
   layanan: [
-    { nama: "Rapot Digital", ikon: "📘", ket: "Lihat nilai dan rapot siswa.", url: "https://contoh.com/rapot" },
-    { nama: "Ujian Online",  ikon: "📝", ket: "Masuk ke ujian berbasis komputer.", url: "https://contoh.com/ujian" },
-    { nama: "Presensi",      ikon: "✅", ket: "Rekap kehadiran siswa dan guru.", url: "https://contoh.com/presensi" }
+    { nama: "Rapot Digital", ikon: "📘", ket: "Lihat nilai dan rapot siswa.", url: "https://rdmmtsattaqwa18.kkmtarumajayabekasi.sch.id/" },
+    { nama: "Ujian Online",  ikon: "📝", ket: "Masuk ke ujian berbasis komputer.", url: "https://mtsattaqwa18.kkmtsbatara.com/" }
   ],
 
   // ---- Profil ----
   sambutan: {
     nama: "Drs. H. Asep Ahmad, M.Ed.",
     foto: "img/kepala.jpg",
-    isi: "Assalamu'alaikum warahmatullahi wabarakatuh. Selamat datang di website resmi MTs Attaqwa 18. Kami berupaya menyiapkan generasi yang kuat ilmunya dan baik akhlaknya. Silakan ganti teks sambutan ini dengan sambutan asli."
+    isi: "Assalamu'alaikum warahmatullahi wabarakatuh. Puji syukur kita panjatkan kepada Allah SWT. Selamat datang di website resmi MTs Attaqwa 18 Tanah Tinggi. Sejak berdiri pada tahun 1995, kami berkomitmen menghadirkan pendidikan Islam yang berkualitas bagi putra-putri masyarakat Tanah Tinggi dan sekitarnya, dengan semangat B. Six Islami: berpikir benar, berbuat baik, berhati bagus, dan Islami. Kami berharap website ini menjadi sarana informasi yang bermanfaat bagi orang tua, siswa, guru, dan masyarakat. Terima kasih atas dukungan dan doa semua pihak. Wassalamu'alaikum warahmatullahi wabarakatuh."
   },
   sejarah: [
     "MTs Attaqwa 18 Tanah Tinggi berdiri pada tahun 1995 sebagai wujud komitmen para Asatidzah dan tokoh masyarakat Kp. Tanah Tinggi, Kec. Tarumajaya, Bekasi dalam menyediakan pendidikan Islam berkualitas di wilayah Tanah Tinggi dan sekitarnya. Berawal dari semangat gotong royong dan kepedulian terhadap pendidikan agama, madrasah ini terus berkembang dan beradaptasi dengan tuntutan zaman.",
@@ -35,17 +34,35 @@ const SITE = {
   misi: ["Pembelajaran terencana logis.", "Pembiasaan pribadi etis.", "Pembentukan pribadi estetis.", "Pelaksanaan syari'at islamis."],
 
   // ---- Guru dan tenaga kependidikan ----
+  // Foto: simpan di folder img/ dengan nama sesuai tulisan setelah img/ (format .jpg)
   guru: [
-    { nama: "Nama Guru 1, S.Pd.",  jabatan: "Guru Matematika", foto: "img/guru1.jpg" },
-    { nama: "Nama Guru 2, S.Ag.",  jabatan: "Guru Akidah Akhlak", foto: "img/guru2.jpg" },
-    { nama: "Nama Staf 1",         jabatan: "Tata Usaha", foto: "img/guru3.jpg" }
+    { nama: "H. Nur Ali, HS", jabatan: "Ketua Yayasan Attaqwa 24 Cabang Tanah Tinggi", foto: "img/nur-ali.jpg" },
+    { nama: "Drs. H. Asep Ahmad, M.Ed", jabatan: "Kepala Madrasah, Guru SKI", foto: "img/asep-ahmad.jpg" },
+    { nama: "Dra. Hj. Tati Hartati", jabatan: "Wakil Kepala Madrasah, Guru Akidah Akhlak", foto: "img/tati-hartati.jpg" },
+    { nama: "H. Nanang Haryanto, S.Ag", jabatan: "Kepala Tata Usaha", foto: "img/nanang.jpg" },
+    { nama: "Hj. Nurfadilah, S.Ag", jabatan: "Bendahara, Wali Kelas VIII, Guru Qur'an Hadis", foto: "img/nurfadilah.jpg" },
+    { nama: "Sifah Fauziah, M.Pd", jabatan: "Waka Kurikulum, Guru TIK", foto: "img/sifah.jpg" },
+    { nama: "Ridhan Fauzi, S.Th.I", jabatan: "Waka Kesiswaan, Wali Kelas IX, Guru Fikih dan PJOK", foto: "img/ridhan.jpg" },
+    { nama: "Nurhasan, S.Pd.I", jabatan: "PKM Bid. Humas, Guru Bahasa Arab", foto: "img/nurhasan.jpg" },
+    { nama: "Juanda, SE", jabatan: "PKM Bid. Sarpras, Guru IPA", foto: "img/juanda.jpg" },
+    { nama: "Moh. Maid, S.Pd.I", jabatan: "Bimbingan Konseling, Guru PPKn", foto: "img/maid.jpg" },
+    { nama: "Asarih, M.Pd", jabatan: "Operator", foto: "img/asarih.jpg" },
+    { nama: "Muntama, S.Ag", jabatan: "Wali Kelas VII, Guru Bahasa Indonesia", foto: "img/muntama.jpg" },
+    { nama: "Ryan Hidayatullah", jabatan: "Guru Tauhid dan IPS", foto: "img/ryan.jpg" },
+    { nama: "Fafidyatul Hidayah", jabatan: "Guru Matematika dan Seni Budaya", foto: "img/fafidyatul.jpg" },
+    { nama: "Atiakah Juariyah", jabatan: "Guru Bahasa Inggris", foto: "img/atiakah.jpg" },
+    { nama: "Nurhasanah", jabatan: "Guru BTQ dan Tahsin", foto: "img/nurhasanah.jpg" }
   ],
 
   // ---- Program dan kegiatan ----
   program: [
     { judul: "Tahfidz Al-Qur'an", isi: "Setoran hafalan harian dengan bimbingan guru." },
-    { judul: "Pramuka", isi: "Latihan rutin setiap pekan untuk melatih disiplin dan kerja sama." },
-    { judul: "Olahraga dan Seni", isi: "Futsal, voli, dan hadroh sebagai wadah bakat siswa." }
+    { judul: "Muhadoroh", isi: "Latihan berpidato dan tampil di depan umum setiap hari Sabtu. Siswa bergantian menjadi pembawa acara, pembaca ayat suci, dan penceramah untuk melatih keberanian dan kepercayaan diri." },
+    { judul: "Tawasulan dan Marhabanan", isi: "Pembacaan tawasul, shalawat, dan marhabanan bersama. Kegiatan ini menanamkan kecintaan kepada Nabi Muhammad SAW serta melestarikan tradisi keagamaan di lingkungan madrasah." },
+    { judul: "Kepramukaan", isi: "Latihan rutin setiap pekan untuk melatih disiplin, kemandirian, kepemimpinan, dan kerja sama." },
+    { judul: "Futsal", isi: "Latihan dan pertandingan untuk menjaga kebugaran, membangun sportivitas, dan melatih kerja sama tim." },
+    { judul: "Renang", isi: "Latihan renang untuk menyehatkan tubuh dan membekali siswa dengan keterampilan serta keselamatan di air." },
+    { judul: "Olahraga dan Seni", isi: "Voli dan hadroh sebagai wadah bakat siswa." }
   ],
 
   // ---- Pengumuman dan berita (tanggal: TAHUN-BULAN-HARI) ----
