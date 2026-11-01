@@ -9,18 +9,21 @@ const NAV = [["index","Beranda"],["profil","Profil"],["guru","Guru"],["program",
 
 const layananLink = l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.nama)}</a>`;
 const berita = () => [...SITE.berita].sort((a, b) => b.tanggal.localeCompare(a.tanggal));
-const kartuBerita = b => `<article class="card">${b.gambar ? img(b.gambar, b.judul, "thumb") : ""}<div class="pad"><time>${b.waktu ? esc(b.waktu) : tgl(b.tanggal)}</time><h3>${esc(b.judul)}</h3><p>${esc(b.isi)}</p></div></article>`;
+const KAT = { Akademik: "c3", Kalender: "c1", Libur: "c2", Kegiatan: "c4" };
+const kartuBerita = b => `<article class="card">${b.gambar ? img(b.gambar, b.judul, "thumb") : ""}<div class="pad">${b.kategori ? `<span class="ch ${KAT[b.kategori] || "c1"}">${esc(b.kategori)}</span>` : ""}<h3>${esc(b.judul)}</h3><p>${esc(b.isi)}</p><time class="dt">${b.waktu ? esc(b.waktu) : tgl(b.tanggal)}</time></div></article>`;
+const daftarBerita = () => `<div class="fl">${["Semua", ...SITE.kategori].map((k, i) => `<button class="${i ? "" : "on"}" data-k="${esc(k)}">${esc(k)}</button>`).join("")}</div><div class="grid g3" id="gb"></div>`;
+const isiBerita = (k = "Semua") => { const l = berita().filter(b => k === "Semua" || b.kategori === k).slice(0, page === "index" ? 3 : 99); $("#gb").innerHTML = l.length ? l.map(kartuBerita).join("") : '<p class="kosong">Belum ada pengumuman di kategori ini.</p>'; };
 
 const PAGES = {
   index: () => `
     <section class="hero"><div class="wrap hero-in">
       <div><h1>${esc(SITE.lengkap)}</h1><p>${esc(SITE.slogan)}</p>
-      <a class="btn" href="profil.html">Kenali madrasah kami</a></div>
+      <a class="btn" href="profil.html">Kenali madrasah kami</a><a class="btn o" href="jadwal.html">Lihat jadwal</a></div>
       <div>${img(SITE.fotoHero, SITE.ketFotoHero || "Gedung " + SITE.nama, "hero-img", true)}${SITE.ketFotoHero ? `<p class="cap">${esc(SITE.ketFotoHero)}</p>` : ""}</div>
     </div></section>
     ${sec("Layanan digital", `<div class="grid g3">${SITE.layanan.map(l => `<a class="card svc pad" href="${esc(l.url)}" target="_blank" rel="noopener"><span class="ico">${l.ikon}</span><h3>${esc(l.nama)}</h3><p>${esc(l.ket)}</p></a>`).join("")}</div>`)}
     ${sec("Sambutan kepala madrasah", `<div class="split">${img(SITE.sambutan.foto, SITE.sambutan.nama, "portrait")}<div><p>${esc(SITE.sambutan.isi)}</p><p class="who">${esc(SITE.sambutan.nama)}</p></div></div>`)}
-    ${sec("Pengumuman dan berita terbaru", `<div class="grid g3">${berita().slice(0, 3).map(kartuBerita).join("")}</div><p class="more"><a href="berita.html">Lihat semua berita</a></p>`)}`,
+    ${sec("Pengumuman terbaru", daftarBerita() + `<p class="more"><a href="berita.html">Lihat semua pengumuman</a></p>`)}`,
 
   profil: () => sec("Profil madrasah", `
     <h3>Sejarah</h3>${[].concat(SITE.sejarah).map(p => `<p>${esc(p)}</p>`).join("")}
@@ -32,7 +35,7 @@ const PAGES = {
 
   program: () => sec("Program dan kegiatan", `<div class="grid g3">${SITE.program.map(p => `<div class="card pad"><h3>${esc(p.judul)}</h3><p>${esc(p.isi)}</p></div>`).join("")}</div>`),
 
-  berita: () => sec("Pengumuman dan berita", `<div class="grid g3">${berita().map(kartuBerita).join("")}</div>`),
+  berita: () => sec("Pengumuman dan berita", daftarBerita()),
 
   galeri: () => sec("Galeri foto", `<div class="grid g3">${SITE.galeri.map(f => `<a href="${esc(f.src)}" target="_blank" rel="noopener" class="card">${img(f.src, f.ket, "thumb")}<p class="pad">${esc(f.ket)}</p></a>`).join("")}</div>`),
 
@@ -50,9 +53,10 @@ function tabelJadwal(k) {
   $("#tbl").innerHTML = `<table><thead><tr><th>Jam</th>${hari.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${j.jam.map((m, i) => `<tr><th>${m}</th>${hari.map(h => `<td>${esc(j.kelas[k][h][i] || "")}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
 }
 
-$("#head").innerHTML = `<header class="top"><div class="wrap bar">
-  <a class="brand" href="index.html">${img("img/logo.png", "Logo " + SITE.nama, "logo", true)}<span>${esc(SITE.nama)}</span></a>
-  <button class="burger" aria-label="Buka menu" aria-expanded="false">Menu</button>
+$("#head").innerHTML = `<header class="top"><div class="wrap">
+  <div class="bar"><a class="brand" href="index.html">${img("img/logo.png", "Logo " + SITE.nama, "logo", true)}<span>${esc(SITE.nama)}</span></a>
+  <div class="rt"><div class="sr"><label class="sbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="Cari pengumuman, guru" aria-label="Cari" autocomplete="off"></label><div id="hasil" class="hasil" hidden></div></div>
+  <button class="tg" id="tema"></button><button class="burger" aria-label="Buka menu" aria-expanded="false">Menu</button></div></div>
   <nav id="nav">${NAV.map(([p, t]) => `<a href="${p}.html"${p === page ? ' aria-current="page"' : ""}>${t}</a>`).join("")}
   <div class="dd"><button class="ddb" aria-expanded="false">Layanan Digital</button><div class="ddm">${SITE.layanan.map(layananLink).join("")}</div></div></nav></div></header>`;
 document.head.insertAdjacentHTML("beforeend", `<link rel="icon" href="img/logo.png"><meta name="theme-color" content="#1F6B50"><meta name="description" content="Website resmi ${esc(SITE.lengkap)}, Tanah Tinggi, Tarumajaya, Bekasi.">`);
@@ -61,5 +65,39 @@ $("#foot").innerHTML = `<footer><div class="wrap"><strong>${esc(SITE.lengkap)}</
 
 const tog = (b, box) => b.addEventListener("click", e => { e.stopPropagation(); const o = box.classList.toggle("open"); b.setAttribute("aria-expanded", o); });
 tog($(".burger"), $("#nav")); tog($(".ddb"), $(".dd"));
-document.addEventListener("click", () => { $(".dd").classList.remove("open"); $(".ddb").setAttribute("aria-expanded", false); });
+document.addEventListener("click", () => { $(".dd").classList.remove("open"); $(".ddb").setAttribute("aria-expanded", false); $("#hasil").hidden = true; });
 if (page === "jadwal") { tabelJadwal($("#kls").value); $("#kls").onchange = e => tabelJadwal(e.target.value); }
+
+// Mode terang/gelap (pilihan disimpan di browser)
+const SUN = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>', MOON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+function setTema(g) {
+  document.documentElement.dataset.tema = g ? "gelap" : "terang";
+  $("#tema").innerHTML = g ? SUN : MOON;
+  $("#tema").setAttribute("aria-label", g ? "Ganti ke mode terang" : "Ganti ke mode gelap");
+  try { localStorage.setItem("tema", g ? "gelap" : "terang"); } catch (e) {}
+}
+let t0 = ""; try { t0 = localStorage.getItem("tema"); } catch (e) {}
+setTema(t0 === "gelap");
+$("#tema").onclick = () => setTema(document.documentElement.dataset.tema !== "gelap");
+
+// Penyaring kategori pengumuman
+if ($("#gb")) { isiBerita(); document.querySelectorAll(".fl button").forEach(b => b.onclick = () => { document.querySelectorAll(".fl button").forEach(x => x.classList.toggle("on", x === b)); isiBerita(b.dataset.k); }); }
+
+// Pencarian
+$("#q").addEventListener("click", e => e.stopPropagation());
+$("#hasil").addEventListener("click", e => e.stopPropagation());
+$("#q").addEventListener("input", e => {
+  const q = e.target.value.trim().toLowerCase(), box = $("#hasil");
+  if (q.length < 2) { box.hidden = true; return; }
+  const r = [], has = t => t.toLowerCase().includes(q);
+  SITE.berita.forEach(b => has(b.judul + " " + b.isi) && r.push(["Pengumuman", b.judul, "berita.html"]));
+  SITE.guru.forEach(g => has(g.nama + " " + g.jabatan) && r.push([g.jabatan, g.nama, "guru.html"]));
+  SITE.program.forEach(p => has(p.judul + " " + p.isi) && r.push(["Program", p.judul, "program.html"]));
+  SITE.layanan.forEach(l => has(l.nama) && r.push(["Layanan digital", l.nama, l.url]));
+  box.innerHTML = r.length ? r.slice(0, 8).map(([k, j, u]) => `<a href="${esc(u)}"${u.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}><strong>${esc(j)}</strong><small>${esc(k)}</small></a>`).join("") : '<p class="kosong pad">Tidak ditemukan.</p>';
+  box.hidden = false;
+});
+
+// Hentikan animasi hiasan saat tidak terlihat (hemat baterai)
+const hr = $(".hero");
+if (hr && "IntersectionObserver" in window) new IntersectionObserver(([e]) => hr.classList.toggle("jeda", !e.isIntersecting)).observe(hr);

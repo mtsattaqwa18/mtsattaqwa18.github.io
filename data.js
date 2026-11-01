@@ -9,7 +9,7 @@ const SITE = {
   slogan: "Berilmu, berakhlak, dan berprestasi.",
   alamat: "Jl. KH. Moh. Musa, Kp. Tanah Tinggi, Kel. Setia Asih, Kec. Tarumajaya, Kab. Bekasi, Kode Pos 17215",
   telp: "+62 882-9102-0525",
-  email: "mtsattaqwa1825@gmail.com",
+  email: "mtstattaqwa1825@gmail.com",
   peta: "MTs Attaqwa 18 Tanah Tinggi, Tarumajaya, Bekasi",            // kata kunci lokasi di Google Maps
   fotoHero: "img/gedung.jpg",         // foto di bagian atas Beranda
   ketFotoHero: "Ilustrasi rencana gedung baru",   // keterangan di bawah foto; hapus isinya ("") jika sudah memakai foto asli
@@ -68,11 +68,12 @@ const SITE = {
 
   // ---- Pengumuman dan berita ----
   // tanggal: TAHUN-BULAN-HARI (untuk mengurutkan). waktu: tulisan tanggal yang tampil di website.
+  kategori: ["Akademik", "Kalender", "Libur", "Kegiatan"],   // daftar penyaring; pilih salah satu untuk tiap berita
   berita: [
-    { judul: "Asesmen Sumatif Akhir Semester I", tanggal: "2026-11-30", waktu: "30 November - 5 Desember 2026", isi: "Asesmen Sumatif Akhir Semester I dilaksanakan pada 30 November sampai 5 Desember 2026.", gambar: "" },
-    { judul: "Penyerahan Laporan Hasil Belajar Semester I", tanggal: "2026-12-19", waktu: "Sabtu, 19 Desember 2026", isi: "Penyerahan Laporan Hasil Belajar (rapor) Semester I dilaksanakan pada Sabtu, 19 Desember 2026.", gambar: "" },
-    { judul: "Libur Semester I", tanggal: "2026-12-21", waktu: "21 Desember 2026 - 3 Januari 2027", isi: "Libur Semester I berlangsung dari 21 Desember 2026 sampai 3 Januari 2027.", gambar: "" },
-    { judul: "Awal Masuk Sekolah Semester II", tanggal: "2027-01-04", waktu: "Senin, 4 Januari 2027", isi: "Kegiatan belajar mengajar Semester II dimulai pada Senin, 4 Januari 2027.", gambar: "" }
+    { judul: "Asesmen Sumatif Akhir Semester I", kategori: "Akademik", tanggal: "2026-11-30", waktu: "30 November - 5 Desember 2026", isi: "Asesmen Sumatif Akhir Semester I dilaksanakan pada 30 November sampai 5 Desember 2026.", gambar: "" },
+    { judul: "Penyerahan Laporan Hasil Belajar Semester I", kategori: "Akademik", tanggal: "2026-12-19", waktu: "Sabtu, 19 Desember 2026", isi: "Penyerahan Laporan Hasil Belajar (rapor) Semester I dilaksanakan pada Sabtu, 19 Desember 2026.", gambar: "" },
+    { judul: "Libur Semester I", kategori: "Libur", tanggal: "2026-12-21", waktu: "21 Desember 2026 - 3 Januari 2027", isi: "Libur Semester I berlangsung dari 21 Desember 2026 sampai 3 Januari 2027.", gambar: "" },
+    { judul: "Awal Masuk Sekolah Semester II", kategori: "Kalender", tanggal: "2027-01-04", waktu: "Senin, 4 Januari 2027", isi: "Kegiatan belajar mengajar Semester II dimulai pada Senin, 4 Januari 2027.", gambar: "" }
   ],
 
   // ---- Galeri ----
