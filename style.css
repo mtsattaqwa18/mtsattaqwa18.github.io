@@ -26,6 +26,7 @@ nav a:hover,.ddb:hover,nav a[aria-current]{background:var(--soft);color:var(--g)
 .hero-in{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center;padding:4rem 0}
 .hero h1{color:#fff;font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:.8rem}
 .hero p{font-size:1.15rem;opacity:.92;margin-bottom:1.5rem}
+.hero .cap{font-size:.85rem;margin:.6rem 0 0;text-align:center}
 .btn{display:inline-block;background:var(--gold);color:#26332E;padding:.7rem 1.4rem;border-radius:999px;font-weight:700;text-decoration:none}
 .btn:hover{background:#d6b974}
 /* kartu */
@@ -33,7 +34,7 @@ nav a:hover,.ddb:hover,nav a[aria-current]{background:var(--soft);color:var(--g)
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;color:inherit;text-decoration:none;display:block}
 .pad{padding:1rem 1.2rem 1.2rem}
 .svc{transition:border-color .2s}.svc:hover{border-color:var(--g2)}.ico{font-size:1.8rem}
-time{font-size:.85rem;color:var(--g2);font-weight:700}
+time{font-size:.85rem;color:#2F7F62;font-weight:700}
 .ph{background:linear-gradient(135deg,var(--soft),#cfe5da);overflow:hidden}
 .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .thumb{aspect-ratio:16/10}.portrait{aspect-ratio:1;border-radius:14px}.card .portrait{border-radius:0}
@@ -47,10 +48,12 @@ time{font-size:.85rem;color:var(--g2);font-weight:700}
 .scroll{overflow-x:auto;margin-top:1rem}
 table{border-collapse:collapse;width:100%;min-width:640px;background:#fff}
 th,td{border:1px solid var(--line);padding:.6rem .8rem;text-align:left}
-thead th{background:var(--g);color:#fff}tbody th{background:var(--soft);white-space:nowrap}
+thead th{background:var(--g);color:#fff}tbody th{background:var(--soft);white-space:nowrap}thead th:first-child,tbody th{position:sticky;left:0}
+.hint{display:none;font-size:.9rem;color:#4a5a54;margin-top:.8rem}.peng{gap:.8rem 1.3rem}.peng p{margin:0}
 footer{margin-top:4rem;background:#26332E;color:#dbe7e1;padding:2rem 0}
 footer strong{color:#fff}footer small{opacity:.7}
 @media(max-width:800px){
+  .hint{display:block}table{font-size:.92rem}
   .burger{display:block}
   nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;align-items:stretch;padding:.6rem 4%;border-bottom:1px solid var(--line)}
   nav.open{display:flex}.ddm{position:static;box-shadow:none;margin-top:.3rem}

@@ -8,10 +8,11 @@ const SITE = {
   lengkap: "Madrasah Tsanawiyah Attaqwa 18",
   slogan: "Berilmu, berakhlak, dan berprestasi.",
   alamat: "Jl. KH. Moh. Musa, Kp. Tanah Tinggi, Kel. Setia Asih, Kec. Tarumajaya, Kab. Bekasi, Kode Pos 17215",
-  telp: "0812-0000-0000",
-  email: "info@contoh.sch.id",
+  telp: "+62 882-9102-0525",
+  email: "mtsattaqwa1825@gmail.com",
   peta: "MTs Attaqwa 18 Tanah Tinggi, Tarumajaya, Bekasi",            // kata kunci lokasi di Google Maps
-  fotoHero: "img/gedung.jpg",         // foto gedung
+  fotoHero: "img/gedung.jpg",         // foto di bagian atas Beranda
+  ketFotoHero: "Ilustrasi rencana gedung baru",   // keterangan di bawah foto; hapus isinya ("") jika sudah memakai foto asli
 
   // ---- Layanan digital (muncul di menu dan di Beranda) ----
   layanan: [
@@ -23,7 +24,7 @@ const SITE = {
   sambutan: {
     nama: "Drs. H. Asep Ahmad, M.Ed.",
     foto: "img/kepala.jpg",
-    isi: "Assalamu'alaikum warahmatullahi wabarakatuh. Puji syukur kita panjatkan kepada Allah SWT. Selamat datang di website resmi MTs Attaqwa 18 Tanah Tinggi. Sejak berdiri pada tahun 1995, kami berkomitmen menghadirkan pendidikan Islam yang berkualitas bagi putra-putri masyarakat Tanah Tinggi dan sekitarnya, dengan semangat B. Six Islami: berpikir benar, berbuat baik, berhati bagus, dan Islami. Kami berharap website ini menjadi sarana informasi yang bermanfaat bagi orang tua, siswa, guru, dan masyarakat. Terima kasih atas dukungan dan doa semua pihak. Wassalamu'alaikum warahmatullahi wabarakatuh."
+    isi: "Assalamu'alaikum warahmatullahi wabarakatuh. Selamat datang di website MTs Attaqwa 18 Tanah Tinggi. Madrasah ini berdiri tahun 1995 karena kepedulian para ustadz dan warga Tanah Tinggi yang ingin anak-anaknya mendapat pendidikan agama yang baik. Itu yang terus kami jaga sampai sekarang: anak-anak belajar ilmu umum dan ilmu agama, dan dibiasakan berakhlak baik dalam keseharian. Lewat website ini, orang tua dan calon siswa bisa mengenal madrasah kami, sementara siswa dan guru bisa melihat jadwal dan pengumuman dengan mudah. Kalau ada yang ingin ditanyakan, silakan datang langsung atau hubungi kami. Wassalamu'alaikum warahmatullahi wabarakatuh."
   },
   sejarah: [
     "MTs Attaqwa 18 Tanah Tinggi berdiri pada tahun 1995 sebagai wujud komitmen para Asatidzah dan tokoh masyarakat Kp. Tanah Tinggi, Kec. Tarumajaya, Bekasi dalam menyediakan pendidikan Islam berkualitas di wilayah Tanah Tinggi dan sekitarnya. Berawal dari semangat gotong royong dan kepedulian terhadap pendidikan agama, madrasah ini terus berkembang dan beradaptasi dengan tuntutan zaman.",
@@ -70,13 +71,13 @@ const SITE = {
   berita: [
     { judul: "Asesmen Sumatif Akhir Semester I", tanggal: "2026-11-30", waktu: "30 November - 5 Desember 2026", isi: "Asesmen Sumatif Akhir Semester I dilaksanakan pada 30 November sampai 5 Desember 2026.", gambar: "" },
     { judul: "Penyerahan Laporan Hasil Belajar Semester I", tanggal: "2026-12-19", waktu: "Sabtu, 19 Desember 2026", isi: "Penyerahan Laporan Hasil Belajar (rapor) Semester I dilaksanakan pada Sabtu, 19 Desember 2026.", gambar: "" },
-    { judul: "Libur Semester I", tanggal: "2026-12-21", waktu: "21 Desember 2026 - 6 Januari 2027", isi: "Libur Semester I berlangsung dari 21 Desember 2026 sampai 6 Januari 2027.", gambar: "" },
-    { judul: "Awal Masuk Sekolah Semester II", tanggal: "2027-01-07", waktu: "7 Januari 2027", isi: "Kegiatan belajar mengajar Semester II dimulai pada 7 Januari 2027.", gambar: "" }
+    { judul: "Libur Semester I", tanggal: "2026-12-21", waktu: "21 Desember 2026 - 3 Januari 2027", isi: "Libur Semester I berlangsung dari 21 Desember 2026 sampai 3 Januari 2027.", gambar: "" },
+    { judul: "Awal Masuk Sekolah Semester II", tanggal: "2027-01-04", waktu: "Senin, 4 Januari 2027", isi: "Kegiatan belajar mengajar Semester II dimulai pada Senin, 4 Januari 2027.", gambar: "" }
   ],
 
   // ---- Galeri ----
   galeri: [
-    { src: "img/gedung.jpg", ket: "Gedung Madrasah" },
+    { src: "img/gedung.jpg", ket: "Ilustrasi rencana gedung baru" },
     { src: "img/pramuka.jpg", ket: "Kegiatan Pramuka" },
     { src: "img/renang.jpg", ket: "Kegiatan Renang" },
     { src: "img/ziarah.jpg", ket: "Ziarah Makam Pahlawan" },
@@ -366,7 +367,7 @@ const SITE = {
       ],
       [
         "Bahasa Arab",
-        "Nurhasan, S.Pd"
+        "Nurhasan, S.Pd.I"
       ],
       [
         "Matematika",
@@ -390,11 +391,11 @@ const SITE = {
       ],
       [
         "Qur'an Hadis",
-        "Hj. Nurfadillah, S.Ag"
+        "Hj. Nurfadilah, S.Ag"
       ],
       [
         "PPKn",
-        "Moh. Maid, S.Pd"
+        "Moh. Maid, S.Pd.I"
       ],
       [
         "Tahsin",
