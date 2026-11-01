@@ -23,7 +23,7 @@ const PAGES = {
     ${sec("Pengumuman dan berita terbaru", `<div class="grid g3">${berita().slice(0, 3).map(kartuBerita).join("")}</div><p class="more"><a href="berita.html">Lihat semua berita</a></p>`)}`,
 
   profil: () => sec("Profil madrasah", `
-    <h3>Sejarah</h3><p>${esc(SITE.sejarah)}</p>
+    <h3>Sejarah</h3>${[].concat(SITE.sejarah).map(p => `<p>${esc(p)}</p>`).join("")}
     <h3>Visi</h3><p>${esc(SITE.visi)}</p>
     <h3>Misi</h3><ul>${SITE.misi.map(m => `<li>${esc(m)}</li>`).join("")}</ul>
     <h3>Sambutan kepala madrasah</h3><div class="split">${img(SITE.sambutan.foto, SITE.sambutan.nama, "portrait")}<div><p>${esc(SITE.sambutan.isi)}</p><p class="who">${esc(SITE.sambutan.nama)}</p></div></div>`, "prose"),
@@ -42,7 +42,7 @@ const PAGES = {
     <h3>Email</h3><p><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></p></div>
     <iframe class="map" title="Peta lokasi" loading="lazy" src="https://maps.google.com/maps?q=${encodeURIComponent(SITE.peta)}&output=embed"></iframe></div>`),
 
-  jadwal: () => sec("Jadwal pelajaran", `<label class="sel">Pilih kelas <select id="kls">${Object.keys(SITE.jadwal.kelas).map(k => `<option>${esc(k)}</option>`).join("")}</select></label><div class="scroll" id="tbl"></div>`)
+  jadwal: () => sec("Jadwal pelajaran " + esc(SITE.jadwal.judul), `<label class="sel">Pilih kelas <select id="kls">${Object.keys(SITE.jadwal.kelas).map(k => `<option>${esc(k)}</option>`).join("")}</select></label><div class="scroll" id="tbl"></div><h3>Guru pengampu</h3><div class="grid g3">${SITE.jadwal.pengampu.map(([m, g]) => `<p><strong>${esc(m)}</strong><br>${esc(g)}</p>`).join("")}</div>`)
 };
 
 function tabelJadwal(k) {
