@@ -9,7 +9,7 @@ const NAV = [["index","Beranda"],["profil","Profil"],["guru","Guru"],["program",
 
 const layananLink = l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.nama)}</a>`;
 const berita = () => [...SITE.berita].sort((a, b) => b.tanggal.localeCompare(a.tanggal));
-const kartuBerita = b => `<article class="card">${b.gambar ? img(b.gambar, b.judul, "thumb") : ""}<div class="pad"><time>${tgl(b.tanggal)}</time><h3>${esc(b.judul)}</h3><p>${esc(b.isi)}</p></div></article>`;
+const kartuBerita = b => `<article class="card">${b.gambar ? img(b.gambar, b.judul, "thumb") : ""}<div class="pad"><time>${b.waktu ? esc(b.waktu) : tgl(b.tanggal)}</time><h3>${esc(b.judul)}</h3><p>${esc(b.isi)}</p></div></article>`;
 
 const PAGES = {
   index: () => `

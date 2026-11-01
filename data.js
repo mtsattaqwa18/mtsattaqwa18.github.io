@@ -65,17 +65,23 @@ const SITE = {
     { judul: "Olahraga dan Seni", isi: "Voli dan hadroh sebagai wadah bakat siswa." }
   ],
 
-  // ---- Pengumuman dan berita (tanggal: TAHUN-BULAN-HARI) ----
+  // ---- Pengumuman dan berita ----
+  // tanggal: TAHUN-BULAN-HARI (untuk mengurutkan). waktu: tulisan tanggal yang tampil di website.
   berita: [
-    { judul: "Contoh pengumuman penting", tanggal: "2026-10-25", isi: "Ganti dengan isi pengumuman. Salin satu blok ini untuk menambah pengumuman baru.", gambar: "" },
-    { judul: "Contoh berita kegiatan", tanggal: "2026-10-18", isi: "Ganti dengan isi berita. Foto boleh dikosongkan atau diisi, misalnya img/berita1.jpg.", gambar: "img/berita1.jpg" }
+    { judul: "Asesmen Sumatif Akhir Semester I", tanggal: "2026-11-30", waktu: "30 November - 5 Desember 2026", isi: "Asesmen Sumatif Akhir Semester I dilaksanakan pada 30 November sampai 5 Desember 2026.", gambar: "" },
+    { judul: "Penyerahan Laporan Hasil Belajar Semester I", tanggal: "2026-12-19", waktu: "Sabtu, 19 Desember 2026", isi: "Penyerahan Laporan Hasil Belajar (rapor) Semester I dilaksanakan pada Sabtu, 19 Desember 2026.", gambar: "" },
+    { judul: "Libur Semester I", tanggal: "2026-12-21", waktu: "21 Desember 2026 - 6 Januari 2027", isi: "Libur Semester I berlangsung dari 21 Desember 2026 sampai 6 Januari 2027.", gambar: "" },
+    { judul: "Awal Masuk Sekolah Semester II", tanggal: "2027-01-07", waktu: "7 Januari 2027", isi: "Kegiatan belajar mengajar Semester II dimulai pada 7 Januari 2027.", gambar: "" }
   ],
 
   // ---- Galeri ----
   galeri: [
-    { src: "img/galeri1.jpg", ket: "Kegiatan 1" },
-    { src: "img/galeri2.jpg", ket: "Kegiatan 2" },
-    { src: "img/galeri3.jpg", ket: "Kegiatan 3" }
+    { src: "img/gedung.jpg", ket: "Gedung Madrasah" },
+    { src: "img/pramuka.jpg", ket: "Kegiatan Pramuka" },
+    { src: "img/renang.jpg", ket: "Kegiatan Renang" },
+    { src: "img/ziarah.jpg", ket: "Ziarah Makam Pahlawan" },
+    { src: "img/suasana.jpg", ket: "Suasana Madrasah" },
+    { src: "img/lab-komputer.jpg", ket: "Laboratorium Komputer" }
   ],
 
   // ---- Jadwal pelajaran ----
