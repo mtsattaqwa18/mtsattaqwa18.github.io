@@ -59,7 +59,6 @@ $("#head").innerHTML = `<header class="top"><div class="wrap">
   <button class="tg" id="tema"></button><button class="burger" aria-label="Buka menu" aria-expanded="false">Menu</button></div></div>
   <nav id="nav">${NAV.map(([p, t]) => `<a href="${p}.html"${p === page ? ' aria-current="page"' : ""}>${t}</a>`).join("")}
   <div class="dd"><button class="ddb" aria-expanded="false">Layanan Digital</button><div class="ddm">${SITE.layanan.map(layananLink).join("")}</div></div></nav></div></header>`;
-document.head.insertAdjacentHTML("beforeend", `<link rel="icon" href="img/logo.png"><meta name="theme-color" content="#1F6B50"><meta name="description" content="Website resmi ${esc(SITE.lengkap)}, Tanah Tinggi, Tarumajaya, Bekasi.">`);
 $("#main").innerHTML = PAGES[page]();
 $("#foot").innerHTML = `<footer><div class="wrap"><strong>${esc(SITE.lengkap)}</strong><p>${esc(SITE.alamat)}</p><p>${[SITE.telp, SITE.email].filter(Boolean).map(esc).join(" | ")}</p><small>© ${new Date().getFullYear()} ${esc(SITE.nama)}</small></div></footer>`;
 
