@@ -9,7 +9,7 @@ const SITE = {
   slogan: "Berilmu, berakhlak, dan berprestasi.",
   alamat: "Jl. KH. Moh. Musa, Kp. Tanah Tinggi, Kel. Setia Asih, Kec. Tarumajaya, Kab. Bekasi, Kode Pos 17215",
   telp: "+62 882-9102-0525",
-  email: "mtstattaqwa1825@gmail.com",
+  email: "mtsattaqwa1825@gmail.com",
   peta: "MTs Attaqwa 18 Tanah Tinggi, Tarumajaya, Bekasi",            // kata kunci lokasi di Google Maps
   fotoHero: "img/gedung.jpg",         // foto di bagian atas Beranda
   ketFotoHero: "Ilustrasi rencana gedung baru",   // keterangan di bawah foto; hapus isinya ("") jika sudah memakai foto asli
@@ -84,6 +84,16 @@ const SITE = {
     { src: "img/ziarah.jpg", ket: "Ziarah Makam Pahlawan" },
     { src: "img/suasana.jpg", ket: "Suasana Madrasah" },
     { src: "img/lab-komputer.jpg", ket: "Laboratorium Komputer" }
+  ],
+
+  // ---- Slide kegiatan siswa di Beranda (bergeser otomatis tiap 5 detik) ----
+  // Tambah atau hapus foto di sini. Foto yang kecil atau berbentuk tegak tetap ditampilkan utuh.
+  slide: [
+    { src: "img/ziarah.jpg", judul: "Ziarah Makam Pahlawan", ket: "Kegiatan ziarah siswa." },
+    { src: "img/renang.jpg", judul: "Kegiatan Renang", ket: "Siswa berlatih dan bermain air bersama." },
+    { src: "img/lab-komputer.jpg", judul: "Laboratorium Komputer", ket: "Kegiatan siswa di laboratorium komputer." },
+    { src: "img/pramuka.jpg", judul: "Kegiatan Pramuka", ket: "Latihan dan kegiatan kepramukaan siswa." },
+    { src: "img/suasana.jpg", judul: "Suasana Madrasah", ket: "Lingkungan belajar di madrasah." }
   ],
 
   // ---- Jadwal pelajaran ----

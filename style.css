@@ -91,3 +91,24 @@ nav{flex-wrap:wrap;padding-bottom:.6rem}
 [data-tema=gelap] thead th,[data-tema=gelap] .fl button.on{color:#12201B}
 [data-tema=gelap] .c1{background:#25483A;color:#BFE6D3}[data-tema=gelap] .c2{background:#4A3F22;color:#EFD9A0}[data-tema=gelap] .c3{background:#23405A;color:#BCD8F2}[data-tema=gelap] .c4{background:#342F55;color:#D6D0F0}
 @media(max-width:800px){.bar{flex-wrap:wrap}.rt{width:100%;position:relative}.sr{position:static;flex:1}.sbox{width:100%}.hasil{left:0;right:0;width:auto;max-width:none}.hero::after{width:380px;height:380px;margin-top:-190px;right:-160px}}
+
+/* slide kegiatan siswa */
+.sl{position:relative;aspect-ratio:16/9;max-height:560px;border-radius:18px;overflow:hidden;background:#1d3a30;box-shadow:0 10px 30px rgba(31,107,80,.15)}
+.sl:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.sd{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .8s ease;display:flex;align-items:center;justify-content:center}
+.sd.on{opacity:1;z-index:1}
+.sd .bd{display:none;position:absolute;inset:-30px;background:center/cover;filter:blur(26px) brightness(.7)}
+.sd.pas .bd,.sd.kecil .bd{display:block}
+.sd img{position:relative;width:100%;height:100%;object-fit:cover}
+.sd.pas img{object-fit:contain}
+.sd.kecil img{width:auto;height:auto;max-width:100%;max-height:100%;border-radius:10px}
+.sd figcaption{position:absolute;left:0;right:0;bottom:0;padding:3.5rem 7rem 1.3rem 1.6rem;background:linear-gradient(transparent,rgba(10,30,22,.82));color:#fff}
+.sd figcaption strong{display:block;font:700 1.35rem Lora,Georgia,serif}.sd figcaption span{opacity:.92}
+.sb{position:absolute;z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:#1F6B50;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sb:hover{background:#fff}.sb.pv{left:14px;top:50%;margin-top:-22px}.sb.nx{right:14px;top:50%;margin-top:-22px}.sb.ps{top:14px;right:14px;width:38px;height:38px}
+.dots{position:absolute;z-index:2;right:1.4rem;bottom:1.3rem;display:flex;gap:.55rem;align-items:center}
+.dots button{position:relative;width:10px;height:10px;padding:0;border:0;border-radius:99px;background:rgba(255,255,255,.55);cursor:pointer;transition:width .3s}
+.dots button::before{content:"";position:absolute;inset:-9px -4px}.dots button.on{width:26px;background:#C8A862}
+.sl.satu .sb,.sl.satu .dots{display:none}
+@media(max-width:800px){.sl{aspect-ratio:4/3}.sb{width:36px;height:36px}.sb.pv,.sb.nx{margin-top:-18px}.sb.ps{width:34px;height:34px}.sd figcaption{padding:2.5rem 5.5rem 1rem 1rem}.sd figcaption strong{font-size:1.05rem}.sd figcaption span{font-size:.9rem}}
+@media(prefers-reduced-motion:reduce){.sd,.dots button{transition:none}}

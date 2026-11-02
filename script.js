@@ -14,6 +14,13 @@ const kartuBerita = b => `<article class="card">${b.gambar ? img(b.gambar, b.jud
 const daftarBerita = () => `<div class="fl">${["Semua", ...SITE.kategori].map((k, i) => `<button class="${i ? "" : "on"}" data-k="${esc(k)}">${esc(k)}</button>`).join("")}</div><div class="grid g3" id="gb"></div>`;
 const isiBerita = (k = "Semua") => { const l = berita().filter(b => k === "Semua" || b.kategori === k).slice(0, page === "index" ? 3 : 99); $("#gb").innerHTML = l.length ? l.map(kartuBerita).join("") : '<p class="kosong">Belum ada pengumuman di kategori ini.</p>'; };
 
+const IKS = {"pv": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M15 5l-7 7 7 7\"/></svg>", "nx": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 5l7 7-7 7\"/></svg>", "pa": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M8 5v14M16 5v14\"/></svg>", "pl": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 4l13 8-13 8z\"/></svg>"};
+const slider = () => `<div class="sl" role="region" aria-roledescription="carousel" aria-label="Foto kegiatan siswa" tabindex="0">
+  ${SITE.slide.map((s, i) => `<figure class="sd${i ? "" : " on"}" aria-hidden="${i ? "true" : "false"}" data-src="${esc(s.src)}"><div class="bd"></div><img alt="${esc(s.judul)}"><figcaption><strong>${esc(s.judul)}</strong><span>${esc(s.ket || "")}</span></figcaption></figure>`).join("")}
+  <button class="sb pv" aria-label="Foto sebelumnya">${IKS.pv}</button><button class="sb nx" aria-label="Foto berikutnya">${IKS.nx}</button>
+  <button class="sb ps" aria-label="Jeda slide">${IKS.pa}</button>
+  <div class="dots">${SITE.slide.map((_, i) => `<button aria-label="Foto ${i + 1} dari ${SITE.slide.length}"${i ? "" : ' class="on"'}></button>`).join("")}</div></div>
+  <p class="more"><a href="galeri.html">Lihat semua foto di galeri</a></p>`;
 const PAGES = {
   index: () => `
     <section class="hero"><div class="wrap hero-in">
@@ -22,6 +29,7 @@ const PAGES = {
       <div>${img(SITE.fotoHero, SITE.ketFotoHero || "Gedung " + SITE.nama, "hero-img", true)}${SITE.ketFotoHero ? `<p class="cap">${esc(SITE.ketFotoHero)}</p>` : ""}</div>
     </div></section>
     ${sec("Layanan digital", `<div class="grid g3">${SITE.layanan.map(l => `<a class="card svc pad" href="${esc(l.url)}" target="_blank" rel="noopener"><span class="ico">${l.ikon}</span><h3>${esc(l.nama)}</h3><p>${esc(l.ket)}</p></a>`).join("")}</div>`)}
+    ${SITE.slide && SITE.slide.length ? sec("Kegiatan siswa", slider()) : ""}
     ${sec("Sambutan kepala madrasah", `<div class="split">${img(SITE.sambutan.foto, SITE.sambutan.nama, "portrait")}<div><p>${esc(SITE.sambutan.isi)}</p><p class="who">${esc(SITE.sambutan.nama)}</p></div></div>`)}
     ${sec("Pengumuman terbaru", daftarBerita() + `<p class="more"><a href="berita.html">Lihat semua pengumuman</a></p>`)}`,
 
@@ -100,3 +108,31 @@ $("#q").addEventListener("input", e => {
 // Hentikan animasi hiasan saat tidak terlihat (hemat baterai)
 const hr = $(".hero");
 if (hr && "IntersectionObserver" in window) new IntersectionObserver(([e]) => hr.classList.toggle("jeda", !e.isIntersecting)).observe(hr);
+
+// Slide kegiatan siswa: foto dimuat saat dibutuhkan, berhenti saat tidak terlihat
+(function () {
+  const sl = $(".sl"); if (!sl) return;
+  const sd = [...sl.querySelectorAll(".sd")], dots = [...sl.querySelectorAll(".dots button")], ps = $(".ps", sl);
+  let i = 0, timer = null, jeda = matchMedia("(prefers-reduced-motion: reduce)").matches, tampil = true, tahan = false;
+  const muat = k => { const f = sd[k], im = $("img", f); if (im.getAttribute("src")) return;
+    im.onload = () => { const w = im.naturalWidth, h = im.naturalHeight; f.classList.add(w < 800 ? "kecil" : w / h < 1.3 ? "pas" : "penuh"); };
+    im.src = f.dataset.src; $(".bd", f).style.backgroundImage = `url("${f.dataset.src}")`; };
+  const jalan = () => { clearInterval(timer); if (!jeda && tampil && !tahan && !document.hidden && sd.length > 1) timer = setInterval(() => ke(i + 1), 5000); };
+  const ke = k => { i = (k + sd.length) % sd.length; muat(i); muat((i + 1) % sd.length);
+    sd.forEach((f, n) => { f.classList.toggle("on", n === i); f.setAttribute("aria-hidden", n !== i); });
+    dots.forEach((d, n) => d.classList.toggle("on", n === i)); };
+  const ikon = () => { ps.innerHTML = jeda ? IKS.pl : IKS.pa; ps.setAttribute("aria-label", jeda ? "Putar slide" : "Jeda slide"); };
+  const geser = k => { ke(k); jalan(); };
+  $(".pv", sl).onclick = () => geser(i - 1); $(".nx", sl).onclick = () => geser(i + 1);
+  dots.forEach((d, n) => d.onclick = () => geser(n));
+  ps.onclick = () => { jeda = !jeda; ikon(); jalan(); };
+  sl.addEventListener("mouseenter", () => { tahan = true; jalan(); }); sl.addEventListener("mouseleave", () => { tahan = false; jalan(); });
+  sl.addEventListener("focusin", () => { tahan = true; jalan(); }); sl.addEventListener("focusout", () => { tahan = false; jalan(); });
+  sl.addEventListener("keydown", e => { if (e.key === "ArrowLeft") geser(i - 1); if (e.key === "ArrowRight") geser(i + 1); });
+  let x0 = null; sl.addEventListener("touchstart", e => x0 = e.touches[0].clientX, { passive: true });
+  sl.addEventListener("touchend", e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) > 40) geser(i + (dx < 0 ? 1 : -1)); });
+  if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { tampil = e.isIntersecting; jalan(); }).observe(sl);
+  document.addEventListener("visibilitychange", jalan);
+  if (sd.length < 2) sl.classList.add("satu");
+  ikon(); muat(0); muat(1); jalan();
+})();
