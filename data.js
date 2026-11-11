@@ -70,7 +70,7 @@ const SITE = {
   // tanggal: TAHUN-BULAN-HARI (untuk mengurutkan). waktu: tulisan tanggal yang tampil di website.
   kategori: ["Akademik", "Kalender", "Libur", "Kegiatan"],   // daftar penyaring; pilih salah satu untuk tiap berita
   berita: [
-    { judul: "Asesmen Sumatif Akhir Semester I", kategori: "Akademik", tanggal: "2026-11-30", waktu: "30 November - 5 Desember 2026", isi: "Asesmen Sumatif Akhir Semester I dilaksanakan pada 30 November sampai 5 Desember 2026.", gambar: "" },
+    { judul: "Asesmen Sumatif Akhir Semester I", kategori: "Akademik", tanggal: "2026-11-30", waktu: "30 November - 5 Desember 2026", isi: "Asesmen Sumatif Akhir Semester I dilaksanakan pada 30 November sampai 5 Desember 2026. Jadwal lengkap ada di halaman Jadwal, tab Jadwal asesmen.", gambar: "" },
     { judul: "Penyerahan Laporan Hasil Belajar Semester I", kategori: "Akademik", tanggal: "2026-12-19", waktu: "Sabtu, 19 Desember 2026", isi: "Penyerahan Laporan Hasil Belajar (rapor) Semester I dilaksanakan pada Sabtu, 19 Desember 2026.", gambar: "" },
     { judul: "Libur Semester I", kategori: "Libur", tanggal: "2026-12-21", waktu: "21 Desember 2026 - 3 Januari 2027", isi: "Libur Semester I berlangsung dari 21 Desember 2026 sampai 3 Januari 2027.", gambar: "" },
     { judul: "Awal Masuk Sekolah Semester II", kategori: "Kalender", tanggal: "2027-01-04", waktu: "Senin, 4 Januari 2027", isi: "Kegiatan belajar mengajar Semester II dimulai pada Senin, 4 Januari 2027.", gambar: "" }
@@ -95,6 +95,42 @@ const SITE = {
     { src: "img/pramuka.jpg", judul: "Kegiatan Pramuka", ket: "Latihan dan kegiatan kepramukaan siswa." },
     { src: "img/suasana.jpg", judul: "Suasana Madrasah", ket: "Lingkungan belajar di madrasah." }
   ],
+
+  // ---- Jadwal asesmen (tampil di tab "Jadwal asesmen") ----
+  // catatan: boleh diisi, misalnya "Berlaku untuk kelas VII, VIII, dan IX." Kosongkan jika tidak perlu.
+  asesmen: {
+    judul: "Jadwal Asesmen Sumatif Akhir Semester I",
+    catatan: "",
+    hari: [
+      { hari: "Senin", tanggal: "2026-11-30", sesi: [
+        { jam: "Jam ke-1", waktu: "07.30-08.30", mapel: "Bahasa Indonesia" },
+        { jam: "Jam ke-2", waktu: "09.00-10.00", mapel: "Qur'an Hadis" }
+      ] },
+      { hari: "Selasa", tanggal: "2026-12-01", sesi: [
+        { jam: "Jam ke-1", waktu: "07.30-08.30", mapel: "IPS" },
+        { jam: "Jam ke-2", waktu: "08.30-09.30", mapel: "SKI" },
+        { jam: "Jam ke-3", waktu: "10.00-11.00", mapel: "Akidah Akhlak" }
+      ] },
+      { hari: "Rabu", tanggal: "2026-12-02", sesi: [
+        { jam: "Jam ke-1", waktu: "07.30-08.30", mapel: "Bahasa Arab" },
+        { jam: "Jam ke-2", waktu: "08.30-09.30", mapel: "Bahasa Inggris" },
+        { jam: "Jam ke-3", waktu: "10.00-11.00", mapel: "Informatika" }
+      ] },
+      { hari: "Kamis", tanggal: "2026-12-03", sesi: [
+        { jam: "Jam ke-1", waktu: "07.30-08.30", mapel: "IPA" },
+        { jam: "Jam ke-2", waktu: "08.30-09.30", mapel: "PJOK" },
+        { jam: "Jam ke-3", waktu: "10.00-11.00", mapel: "Fikih" }
+      ] },
+      { hari: "Jumat", tanggal: "2026-12-04", sesi: [
+        { jam: "Jam ke-1", waktu: "07.30-08.30", mapel: "Matematika" },
+        { jam: "Jam ke-2", waktu: "09.00-10.00", mapel: "PPKn" }
+      ] },
+      { hari: "Sabtu", tanggal: "2026-12-05", sesi: [
+        { jam: "Jam ke-1", waktu: "07.30-08.30", mapel: "Tahsin Al-Qur'an" },
+        { jam: "Jam ke-2", waktu: "09.00-10.00", mapel: "Seni Rupa" }
+      ] }
+    ]
+  },
 
   // ---- Jadwal pelajaran ----
   // Urutan isi tiap hari mengikuti urutan jam.

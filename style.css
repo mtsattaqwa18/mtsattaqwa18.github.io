@@ -112,3 +112,9 @@ nav{flex-wrap:wrap;padding-bottom:.6rem}
 .sl.satu .sb,.sl.satu .dots{display:none}
 @media(max-width:800px){.sl{aspect-ratio:4/3}.sb{width:36px;height:36px}.sb.pv,.sb.nx{margin-top:-18px}.sb.ps{width:34px;height:34px}.sd figcaption{padding:2.5rem 5.5rem 1rem 1rem}.sd figcaption strong{font-size:1.05rem}.sd figcaption span{font-size:.9rem}}
 @media(prefers-reduced-motion:reduce){.sd,.dots button{transition:none}}
+
+/* tab jadwal dan daftar asesmen */
+.tabs-w{padding-top:2rem}.tabs{margin-bottom:0}
+#tab-reguler .sec,#tab-asesmen .sec{padding-top:1.4rem}
+.ses{list-style:none;padding:0;margin:.4rem 0 0}.ses li{padding:.6rem 0;border-top:1px solid var(--line)}.ses li:first-child{border-top:0}
+.ses strong{display:block}.ses small{color:var(--mut);font-size:.9rem}

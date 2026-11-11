@@ -1,6 +1,6 @@
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const tgl = d => new Date(d).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+const tgl = d => new Date(d + "T12:00:00").toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
 // Gambar dengan latar cadangan: jika file foto belum ada, kotak hijau tetap tampil.
 const img = (src, alt, cls = "", eager = false) => `<div class="ph ${cls}"><img src="${esc(src)}" alt="${esc(alt)}" loading="${eager ? "eager" : "lazy"}" onerror="this.remove()"></div>`;
 const sec = (t, h, c = "") => `<section class="wrap sec ${c}"><h2>${t}</h2>${h}</section>`;
@@ -21,6 +21,7 @@ const slider = () => `<div class="sl" role="region" aria-roledescription="carous
   <button class="sb ps" aria-label="Jeda slide">${IKS.pa}</button>
   <div class="dots">${SITE.slide.map((_, i) => `<button aria-label="Foto ${i + 1} dari ${SITE.slide.length}"${i ? "" : ' class="on"'}></button>`).join("")}</div></div>
   <p class="more"><a href="galeri.html">Lihat semua foto di galeri</a></p>`;
+const asesmen = () => { const a = SITE.asesmen; return `${a.catatan ? `<p>${esc(a.catatan)}</p>` : ""}<div class="grid g3">${a.hari.map(h => `<div class="card pad"><h3>${esc(h.hari)}, ${tgl(h.tanggal)}</h3><ul class="ses">${h.sesi.map(x => `<li><strong>${esc(x.mapel)}</strong><small>${esc(x.jam)} (${esc(x.waktu)})</small></li>`).join("")}</ul></div>`).join("")}</div>`; };
 const PAGES = {
   index: () => `
     <section class="hero"><div class="wrap hero-in">
@@ -53,7 +54,7 @@ const PAGES = {
     ${SITE.email ? `<h3>Email</h3><p><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></p>` : ""}</div>
     <iframe class="map" title="Peta lokasi" loading="lazy" src="https://maps.google.com/maps?q=${encodeURIComponent(SITE.peta)}&output=embed"></iframe></div>`),
 
-  jadwal: () => sec("Jadwal pelajaran " + esc(SITE.jadwal.judul), `<label class="sel">Pilih kelas <select id="kls">${Object.keys(SITE.jadwal.kelas).map(k => `<option>${esc(k)}</option>`).join("")}</select></label><p class="hint">Geser tabel ke samping untuk melihat hari lainnya.</p><div class="scroll" id="tbl"></div><h3>Guru pengampu</h3><div class="grid g3 peng">${SITE.jadwal.pengampu.map(([m, g]) => `<p><strong>${esc(m)}</strong><br>${esc(g)}</p>`).join("")}</div>`)
+  jadwal: () => `<div class="wrap tabs-w"><div class="fl tabs" role="group" aria-label="Pilih jadwal"><button data-tab="reguler" class="on">Jadwal pelajaran</button><button data-tab="asesmen">Jadwal asesmen</button></div></div><div id="tab-reguler">${sec("Jadwal pelajaran " + esc(SITE.jadwal.judul), `<label class="sel">Pilih kelas <select id="kls">${Object.keys(SITE.jadwal.kelas).map(k => `<option>${esc(k)}</option>`).join("")}</select></label><p class="hint">Geser tabel ke samping untuk melihat hari lainnya.</p><div class="scroll" id="tbl"></div><h3>Guru pengampu</h3><div class="grid g3 peng">${SITE.jadwal.pengampu.map(([m, g]) => `<p><strong>${esc(m)}</strong><br>${esc(g)}</p>`).join("")}</div>`)}</div><div id="tab-asesmen" hidden>${sec(esc(SITE.asesmen.judul), asesmen())}</div>`
 };
 
 function tabelJadwal(k) {
@@ -73,7 +74,15 @@ $("#foot").innerHTML = `<footer><div class="wrap"><strong>${esc(SITE.lengkap)}</
 const tog = (b, box) => b.addEventListener("click", e => { e.stopPropagation(); const o = box.classList.toggle("open"); b.setAttribute("aria-expanded", o); });
 tog($(".burger"), $("#nav")); tog($(".ddb"), $(".dd"));
 document.addEventListener("click", () => { $(".dd").classList.remove("open"); $(".ddb").setAttribute("aria-expanded", false); $("#hasil").hidden = true; });
-if (page === "jadwal") { tabelJadwal($("#kls").value); $("#kls").onchange = e => tabelJadwal(e.target.value); }
+if (page === "jadwal") {
+  tabelJadwal($("#kls").value); $("#kls").onchange = e => tabelJadwal(e.target.value);
+  const tabs = [...document.querySelectorAll(".tabs button")];
+  const buka = t => { tabs.forEach(b => b.classList.toggle("on", b.dataset.tab === t)); $("#tab-reguler").hidden = t !== "reguler"; $("#tab-asesmen").hidden = t !== "asesmen"; };
+  tabs.forEach(b => b.onclick = () => { buka(b.dataset.tab); try { history.replaceState(null, "", b.dataset.tab === "asesmen" ? "#asesmen" : location.pathname); } catch (e) {} });
+  // otomatis membuka tab asesmen saat masa asesmen berlangsung atau jika alamatnya diakhiri #asesmen
+  const hh = SITE.asesmen.hari, now = new Date(), dalam = now >= new Date(hh[0].tanggal + "T00:00:00") && now <= new Date(hh[hh.length - 1].tanggal + "T23:59:59");
+  buka(location.hash === "#asesmen" || dalam ? "asesmen" : "reguler");
+}
 
 // Mode terang/gelap (pilihan disimpan di browser)
 const SUN = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>', MOON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
