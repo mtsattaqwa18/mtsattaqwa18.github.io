@@ -96,6 +96,15 @@ const SITE = {
     { src: "img/suasana.jpg", judul: "Suasana Madrasah", ket: "Lingkungan belajar di madrasah." }
   ],
 
+  // ---- Unduhan (menu Unduhan) ----
+  // url: tempel link "bagikan" dari Google Drive (atur akses: Siapa saja yang memiliki link). Tombol Unduh dibuat otomatis.
+  // jenis, ukuran, petunjuk boleh dikosongkan atau dihapus.
+  unduhan: [
+    { nama: "Aplikasi CBT MTs Attaqwa 18", jenis: "Aplikasi Android (APK)", ket: "Aplikasi CBT (Computer Based Test) MTs Attaqwa 18 untuk HP Android.",
+      url: "https://drive.google.com/file/d/1pzyDfMQ7VsfMn1r4NGGBJXK1jrPS6277/view?usp=sharing",
+      petunjuk: ["Ketuk tombol Unduh, lalu buka file yang selesai diunduh.", "Jika HP menanyakan izin pemasangan dari sumber ini, pilih Izinkan.", "Setelah terpasang, buka aplikasinya dari layar utama."] }
+  ],
+
   // ---- Jadwal asesmen (tampil di tab "Jadwal asesmen") ----
   // catatan: boleh diisi, misalnya "Berlaku untuk kelas VII, VIII, dan IX." Kosongkan jika tidak perlu.
   asesmen: {

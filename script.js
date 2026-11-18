@@ -1,3 +1,5 @@
+// Nilai awal untuk bagian opsional, supaya website tetap jalan jika data.js belum memuatnya
+SITE.slide = SITE.slide || []; SITE.unduhan = SITE.unduhan || []; SITE.kategori = SITE.kategori || ["Akademik", "Kalender", "Libur", "Kegiatan"]; SITE.asesmen = SITE.asesmen || { judul: "Jadwal Asesmen", hari: [] };
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const tgl = d => new Date(d + "T12:00:00").toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
@@ -5,7 +7,7 @@ const tgl = d => new Date(d + "T12:00:00").toLocaleDateString("id-ID", { day: "n
 const img = (src, alt, cls = "", eager = false) => `<div class="ph ${cls}"><img src="${esc(src)}" alt="${esc(alt)}" loading="${eager ? "eager" : "lazy"}" onerror="this.remove()"></div>`;
 const sec = (t, h, c = "") => `<section class="wrap sec ${c}"><h2>${t}</h2>${h}</section>`;
 const page = document.body.dataset.page;
-const NAV = [["index","Beranda"],["profil","Profil"],["guru","Guru"],["program","Program"],["berita","Berita"],["jadwal","Jadwal"],["galeri","Galeri"],["kontak","Kontak"]];
+const NAV = [["index","Beranda"],["profil","Profil"],["guru","Guru"],["program","Program"],["berita","Berita"],["jadwal","Jadwal"],["galeri","Galeri"],["unduhan","Unduhan"],["kontak","Kontak"]];
 
 const layananLink = l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.nama)}</a>`;
 const berita = () => [...SITE.berita].sort((a, b) => b.tanggal.localeCompare(a.tanggal));
@@ -22,6 +24,9 @@ const slider = () => `<div class="sl" role="region" aria-roledescription="carous
   <div class="dots">${SITE.slide.map((_, i) => `<button aria-label="Foto ${i + 1} dari ${SITE.slide.length}"${i ? "" : ' class="on"'}></button>`).join("")}</div></div>
   <p class="more"><a href="galeri.html">Lihat semua foto di galeri</a></p>`;
 const asesmen = () => { const a = SITE.asesmen; return `${a.catatan ? `<p>${esc(a.catatan)}</p>` : ""}<div class="grid g3">${a.hari.map(h => `<div class="card pad"><h3>${esc(h.hari)}, ${tgl(h.tanggal)}</h3><ul class="ses">${h.sesi.map(x => `<li><strong>${esc(x.mapel)}</strong><small>${esc(x.jam)} (${esc(x.waktu)})</small></li>`).join("")}</ul></div>`).join("")}</div>`; };
+const driveId = u => (u.match(/drive\.google\.com\/file\/d\/([\w-]+)/) || u.match(/drive\.google\.com\/(?:open|uc)\?(?:[^#]*&)?id=([\w-]+)/) || [])[1];
+const unduhHref = u => { const id = driveId(u); return id ? `https://drive.google.com/uc?export=download&id=${id}` : u; };
+const kartuUnduh = u => { const d = !!driveId(u.url); return `<div class="card pad"><span class="ch c1">${esc(u.jenis || "Berkas")}</span><h3>${esc(u.nama)}</h3><p>${esc(u.ket || "")}${u.ukuran ? ` (${esc(u.ukuran)})` : ""}</p>${u.petunjuk ? `<details><summary>Cara pasang</summary><ol>${u.petunjuk.map(t => `<li>${esc(t)}</li>`).join("")}</ol></details>` : ""}<p class="aksi"><a class="btn" href="${esc(unduhHref(u.url))}" target="_blank" rel="noopener">${d ? "Unduh" : "Buka tautan"}</a>${d ? `<a href="${esc(u.url)}" target="_blank" rel="noopener">Buka di Google Drive</a>` : ""}</p></div>`; };
 const PAGES = {
   index: () => `
     <section class="hero"><div class="wrap hero-in">
@@ -45,6 +50,8 @@ const PAGES = {
   program: () => sec("Program dan kegiatan", `<div class="grid g3">${SITE.program.map(p => `<div class="card pad"><h3>${esc(p.judul)}</h3><p>${esc(p.isi)}</p></div>`).join("")}</div>`),
 
   berita: () => sec("Pengumuman dan berita", daftarBerita()),
+
+  unduhan: () => sec("Unduhan", `<p class="intro">Unduh aplikasi dan berkas dari madrasah di sini.</p>${SITE.unduhan.length ? `<div class="grid g3 un">${SITE.unduhan.map(kartuUnduh).join("")}</div>` : '<p class="kosong">Belum ada berkas.</p>'}`),
 
   galeri: () => sec("Galeri foto", `<div class="grid g3">${SITE.galeri.map(f => `<a href="${esc(f.src)}" target="_blank" rel="noopener" class="card">${img(f.src, f.ket, "thumb")}<p class="pad">${esc(f.ket)}</p></a>`).join("")}</div>`),
 
@@ -80,8 +87,8 @@ if (page === "jadwal") {
   const buka = t => { tabs.forEach(b => b.classList.toggle("on", b.dataset.tab === t)); $("#tab-reguler").hidden = t !== "reguler"; $("#tab-asesmen").hidden = t !== "asesmen"; };
   tabs.forEach(b => b.onclick = () => { buka(b.dataset.tab); try { history.replaceState(null, "", b.dataset.tab === "asesmen" ? "#asesmen" : location.pathname); } catch (e) {} });
   // otomatis membuka tab asesmen saat masa asesmen berlangsung atau jika alamatnya diakhiri #asesmen
-  const hh = SITE.asesmen.hari, now = new Date(), dalam = now >= new Date(hh[0].tanggal + "T00:00:00") && now <= new Date(hh[hh.length - 1].tanggal + "T23:59:59");
-  buka(location.hash === "#asesmen" || dalam ? "asesmen" : "reguler");
+  const hh = SITE.asesmen.hari || [], now = new Date(), dalam = hh.length > 0 && now >= new Date(hh[0].tanggal + "T00:00:00") && now <= new Date(hh[hh.length - 1].tanggal + "T23:59:59");
+  buka(hh.length && (location.hash === "#asesmen" || dalam) ? "asesmen" : "reguler"); if (!hh.length) tabs[1].hidden = true;
 }
 
 // Mode terang/gelap (pilihan disimpan di browser)
@@ -110,6 +117,7 @@ $("#q").addEventListener("input", e => {
   SITE.guru.forEach(g => has(g.nama + " " + g.jabatan) && r.push([g.jabatan, g.nama, "guru.html"]));
   SITE.program.forEach(p => has(p.judul + " " + p.isi) && r.push(["Program", p.judul, "program.html"]));
   SITE.layanan.forEach(l => has(l.nama) && r.push(["Layanan digital", l.nama, l.url]));
+  SITE.unduhan.forEach(u => has(u.nama + " " + (u.ket || "")) && r.push(["Unduhan", u.nama, "unduhan.html"]));
   box.innerHTML = r.length ? r.slice(0, 8).map(([k, j, u]) => `<a href="${esc(u)}"${u.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}><strong>${esc(j)}</strong><small>${esc(k)}</small></a>`).join("") : '<p class="kosong pad">Tidak ditemukan.</p>';
   box.hidden = false;
 });

@@ -118,3 +118,9 @@ nav{flex-wrap:wrap;padding-bottom:.6rem}
 #tab-reguler .sec,#tab-asesmen .sec{padding-top:1.4rem}
 .ses{list-style:none;padding:0;margin:.4rem 0 0}.ses li{padding:.6rem 0;border-top:1px solid var(--line)}.ses li:first-child{border-top:0}
 .ses strong{display:block}.ses small{color:var(--mut);font-size:.9rem}
+
+/* halaman unduhan */
+.intro{margin:0 0 1.2rem;color:var(--mut)}
+details{margin:.8rem 0}summary{cursor:pointer;color:var(--g);font-weight:700}details ol{padding-left:1.2rem;margin:.5rem 0 0}details li{margin:.3rem 0}
+.aksi{margin-top:1rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.un{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
