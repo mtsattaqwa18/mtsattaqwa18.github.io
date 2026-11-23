@@ -100,9 +100,9 @@ const SITE = {
   // url: tempel link "bagikan" dari Google Drive (atur akses: Siapa saja yang memiliki link). Tombol Unduh dibuat otomatis.
   // jenis, ukuran, petunjuk boleh dikosongkan atau dihapus.
   unduhan: [
-    { nama: "Aplikasi CBT MTs Attaqwa 18", jenis: "Aplikasi Android (APK)", ket: "Aplikasi CBT (Computer Based Test) MTs Attaqwa 18 untuk HP Android.",
-      url: "https://drive.google.com/file/d/1pzyDfMQ7VsfMn1r4NGGBJXK1jrPS6277/view?usp=sharing",
-      petunjuk: ["Ketuk tombol Unduh, lalu buka file yang selesai diunduh.", "Jika HP menanyakan izin pemasangan dari sumber ini, pilih Izinkan.", "Setelah terpasang, buka aplikasinya dari layar utama."] }
+    { nama: "Aplikasi CBT MTs Attaqwa 18 (Versi 2)", jenis: "Aplikasi Android (APK)", ket: "Aplikasi CBT (Computer Based Test) MTs Attaqwa 18 untuk HP Android.",
+      url: "https://drive.google.com/file/d/15K-JiD1BX_IpcQsPwUOk68ffvPiErSpV/view?usp=sharing",
+      petunjuk: ["Ketuk tombol Unduh, lalu buka file yang selesai diunduh.", "Jika HP menanyakan izin pemasangan dari sumber ini, pilih Izinkan.", "Setelah terpasang, buka aplikasinya dari layar utama.", "Jika pemasangan gagal karena versi lama masih ada, hapus aplikasi lama terlebih dahulu, lalu pasang lagi."] }
   ],
 
   // ---- Jadwal asesmen (tampil di tab "Jadwal asesmen") ----
